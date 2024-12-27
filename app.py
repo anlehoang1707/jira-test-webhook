@@ -3,6 +3,10 @@ from flask_lambda import FlaskLambda
 
 app = FlaskLambda(__name__)
 
+@app.route('/')
+def homepage():
+    return "Welcome to the Homepage!"
+
 @app.route('/webhook', methods = ["POST"])
 def webhook():
     if request.method == "POST":
