@@ -1,15 +1,18 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from flask_lambda import FlaskLambda
 
 app = FlaskLambda(__name__)
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods = ["POST"])
 def webhook():
-    data = request.json
-    print("Received webhook payload:", data)
-    return jsonify({"message": "Webhook received"}), 200
+    if request.method == "POST":
+        print ("Getting result...")
+        print ("Getting results...",request.json) 
+        return "success", 200
+    else:
+        abort(400)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 
 '''test'''
